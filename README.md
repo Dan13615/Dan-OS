@@ -41,6 +41,18 @@ Remove the build-evironment image:
 
 - `docker rmi dan-os -f`
 
+## Dev
+
+Quick dev tip:
+
+Inside of the docker container, run the following:
+
+> apt-get update && apt-get install entr
+> find src/ | entr make build
+
+To auto rebuild everytime you change a file on the src directory
+Note: you'll need to Ctrl+C and restart the find command if you _create_ a new file
+
 ## License
 
 This project is licensed under the GNU GENERAL PUBLIC LICENSE - see the [LICENSE](LICENSE) file for details.

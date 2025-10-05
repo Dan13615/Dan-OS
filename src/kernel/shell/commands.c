@@ -10,6 +10,8 @@
 #include "tty.h"
 #include "power.h"
 
+#include "vim_mode.h"
+
 extern void ioport_out(unsigned short port, unsigned char value);
 
 int cmd_echo(const char* args) {
@@ -31,6 +33,7 @@ int cmd_help(const char* args) {
     tty_putstr_endl("  clear        - Clear the screen");
     tty_putstr_endl("  help         - Show help message");
     tty_putstr_endl("  flex         - Display the welcome message");
+    tty_putstr_endl("  vim          - Start vim-like text editor");
     tty_putstr_endl("  poweroff     - Shutdown the system");
     return 0;
 }
@@ -39,6 +42,14 @@ int cmd_flex(const char* args) {
     cmd_clear(args);
     welcome_message();
     return 0;
+}
+
+int cmd_vim(const char* args) {
+    // TODO: once filesystem is setup lol
+    // set_vim_arguments(args)
+    UNUSED(args);
+    start_vim();
+    return 1;
 }
 
 int cmd_poweroff(const char* args) {
@@ -52,6 +63,7 @@ int (*commands[])(const char*) = {
     cmd_clear,
     cmd_help,
     cmd_flex,
+    cmd_vim,
     cmd_poweroff,
     NULL
 };
@@ -61,6 +73,7 @@ const char *command_names[] = {
     "clear",
     "help",
     "flex",
+    "vim",
     "poweroff",
     NULL
 };

@@ -8,6 +8,7 @@ KEYBOARD_SRCS =	$(wildcard src/kernel/keyboard/*.c)
 TIMER_SRCS  =   $(wildcard src/kernel/timer/*.c)
 SHELL_SRCS  =   $(wildcard src/kernel/shell/*.c)
 POWER_SRCS  =   $(wildcard src/kernel/power/*.c)
+VIM_SRCS  	=   $(wildcard src/kernel/vim/*.c)
 
 ASM_PATH 	= 	src/bootloader/%.asm
 KERNEL_PATH = 	src/kernel/%.c
@@ -18,6 +19,7 @@ KEYBOARD_PATH = src/kernel/keyboard/%.c
 TIMER_PATH  =   src/kernel/timer/%.c
 SHELL_PATH  =   src/kernel/shell/%.c
 POWER_PATH  =   src/kernel/power/%.c
+VIM_PATH  	=   src/kernel/vim/%.c
 
 OBJ_PATH 	= 	obj/%.o
 
@@ -30,8 +32,9 @@ STR_OBJS 	= 	$(patsubst $(STR_PATH), $(OBJ_PATH), $(STR_SRCS))
 TIMER_OBJS  =   $(patsubst $(TIMER_PATH), $(OBJ_PATH), $(TIMER_SRCS))
 SHELL_OBJS  =   $(patsubst $(SHELL_PATH), $(OBJ_PATH), $(SHELL_SRCS))
 POWER_OBJS  =   $(patsubst $(POWER_PATH), $(OBJ_PATH), $(POWER_SRCS))
+VIM_OBJS  	=   $(patsubst $(VIM_PATH), $(OBJ_PATH), $(VIM_SRCS))
 
-OBJS 		= 	$(ASM_OBJS) $(KERNEL_OBJS) $(TTY_OBJS) $(IDT_OBJS) $(KEYBOARD_OBJS) $(STR_OBJS) $(TIMER_OBJS) $(SHELL_OBJS) $(POWER_OBJS)
+OBJS 		= 	$(ASM_OBJS) $(KERNEL_OBJS) $(TTY_OBJS) $(IDT_OBJS) $(KEYBOARD_OBJS) $(STR_OBJS) $(TIMER_OBJS) $(SHELL_OBJS) $(POWER_OBJS) $(VIM_OBJS)
 
 NAME 		= 	DanOs
 BIN 		= 	target/x86_64/iso/boot/kernel.bin
@@ -81,6 +84,10 @@ $(SHELL_OBJS): $(OBJ_PATH): $(SHELL_PATH)
 $(POWER_OBJS): $(OBJ_PATH): $(POWER_PATH)
 	@ $(MK) $(dir $@) && \
 	$(CC) -c $(patsubst $(OBJ_PATH), $(POWER_PATH), $@) -o $@
+
+$(VIM_OBJS): $(OBJ_PATH): $(VIM_PATH)
+	@ $(MK) $(dir $@) && \
+	$(CC) -c $(patsubst $(OBJ_PATH), $(VIM_PATH), $@) -o $@
 
 $(ASM_OBJS): $(OBJ_PATH): $(ASM_PATH)
 	@ $(MK) $(dir $@) && \

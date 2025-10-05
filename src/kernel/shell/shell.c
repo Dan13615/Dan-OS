@@ -12,6 +12,8 @@
 #include "string.h"
 #include "bool.h"
 
+#include "vim_mode.h"
+
 static char input_buffer[SHELL_MAX_INPUT_LENGTH];
 static size_t buffer_index;
 
@@ -23,6 +25,11 @@ void init_shell(void) {
 
 void add_to_buffer(char c) {
     bool new_line = true;
+
+    if (is_vim_enabled()) {
+        send_key_handle_to_vim(c);
+        return;
+    }
 
     if (c == '\b') { // Handle backspace
         if (buffer_index > 0) {
@@ -41,7 +48,7 @@ void add_to_buffer(char c) {
         }
         clear_buffer();
         if (new_line) tty_end_line();
-        print_prompt(); // Display prompt again
+        if (!is_vim_enabled()) print_prompt(); // Display prompt again
     } else if (buffer_index < SHELL_MAX_INPUT_LENGTH - 1) { // Regular character
         tty_putchar(c);
         input_buffer[buffer_index++] = c;
