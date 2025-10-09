@@ -1,12 +1,13 @@
 ENTRY(start);
 SECTIONS
 {
-    . = 1M;
-
+    . = 0x0;
     .boot :
     {
         KEEP(*(.header))
     }
+
+    . = 1M;
     .text :
     {
         *(.text)

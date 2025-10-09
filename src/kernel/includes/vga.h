@@ -28,8 +28,20 @@
       PRINT_COLOR_WHITE = 15,
     };
 
+    #define TTY_BACKGROUND_COLOR PRINT_COLOR_BLACK
+    #define PRINT_COLOR_DEFAULT PRINT_COLOR_LIGHT_GREY
+    #define PRINT_COLOR_ERROR PRINT_COLOR_RED
+    #define PRINT_COLOR_PROMPT PRINT_COLOR_LIGHT_BLUE
+    #define PRINT_COLOR_DANOS PRINT_COLOR_YELLOW
+
     #define VGA_WIDTH 80
     #define VGA_HEIGHT 25
     #define VGA_BUFFER (uint16_t*) 0xB8000
+
+    // VGA cursor control ports
+    #define VGA_CTRL_REGISTER 0x3D4
+    #define VGA_DATA_REGISTER 0x3D5
+    #define VGA_CURSOR_HIGH 0x0E
+    #define VGA_CURSOR_LOW 0x0F
 
 #endif //VGA_H

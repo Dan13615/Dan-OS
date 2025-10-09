@@ -2,3 +2,7 @@
 .vscode/
 kernel.bin
 .clang-format
+docs/
+build/
+*.o
+*.iso

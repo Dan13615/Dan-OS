@@ -4,9 +4,9 @@
 
 #include "string.h"
 
-int strlength(const char* str) {
+int strlen(const char* str) {
     int len = 0;
-    while (str[len])
+    while (str[len] != '\0')
       len++;
     return len;
 }
