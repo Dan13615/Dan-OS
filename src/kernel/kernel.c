@@ -7,6 +7,7 @@
 #include "keyboard.h"
 #include "shell.h"
 #include "timer.h"
+#include "fat32.h"
 
 extern void enable_interrupts();
 
@@ -18,5 +19,6 @@ void kernel_main(void) {
     init_keyboard();
     init_shell();
     enable_interrupts();
+    fat32_init(2048);
     while(1){}
 }

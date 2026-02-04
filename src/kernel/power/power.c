@@ -131,9 +131,9 @@ void legacy_poweroff(void) {
         ioport_out(0x8900, qemu_shutdown[i]);
     }
     // Method 2: VirtualBox - write to port 0x4004
-    ioport_out(0x4004, 0x3400);
+    ioport_out(0x4004, 0x3400 & 0xFF);
     // Method 3: VMware - write to port 0x1004
-    ioport_out(0x1004, 0x3400);
+    ioport_out(0x1004, 0x3400 & 0xFF);
     // Method 4: Try APM (Advanced Power Management)
     // APM BIOS call via port 0x53
     ioport_out(0x53, 0x00); // APM function: Set Power State
